@@ -3,36 +3,45 @@
 
 using namespace std;
 
-string elements(char input)
-{
-	string stuff[6] = { "He","Lr","W","O","Rg","Gd" };
-	
-	
-	if (input == ' ')
-		return " ";
-	else
-	{
-		for (int i = 0; i < 6; i++)
-		{
-			for (int j = 0; j < 2; j++)
-			{
-				if (input == stuff[i][j])
-				{
-					return stuff[i];
-				}
-			}
-		}
-	}
-}
-
 int main()
 {
 	string helloWorld = "Hello World";
+	const int numberOfElements = 118;
+	string stuff[numberOfElements] = { "H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg", "Al", "Si", "P", "S", "Cl", "Ar", "K", "Ca", "Sc", "Ti", "V", "Ci", "Mn",
+		"Fe", "Co", "Ni", "Cu", "Zn", "Ga", "Ge", "As", "Se", "Br", "Kr", "Rb", "Sr", "Y", "Zr", "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag",
+		"Cd", "In", "Sn", "Sb", "Te", "I", "Xe", "Cs", "Ba", "La", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu",
+		"Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Hg", "Tl", "Pb", "Bi", "Po", "At", "Rn", "Fr", "Ra", "Ac", "Th", "Pa", "U", "Np", "Pu", "Am",
+		"Cm", "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr", "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds", "Rg", "Cn", "Nh", "Fl", "Mc", "Lv", "Ts", "Og" };
 
-	for (int i = 0; i < helloWorld.size(); i++)
-		cout<<elements(helloWorld[i]);
+	char *c = new char;
 	
-
+	for (signed int i = 0; i < numberOfElements; i++)
+	{
+			size_t found = helloWorld.find(stuff[i]);
+			if (found == string::npos)
+			{
+				//Search lowercase
+				for (signed int index = 0; index < stuff[i].length(); index++)
+				{
+					c = &stuff[i][index];
+					found = helloWorld.find(c);
+					if (found != string::npos)
+					{
+						helloWorld.replace(found, stuff[i].length(), stuff[i]);
+						
+					}
+					else
+					{
+					//empty
+					}
+				}
+			}
+			else
+			{
+				helloWorld.replace(found, stuff[i].length(), stuff[i]);
+			}
+		
+	}
 	cout << endl;
 	cout << helloWorld;
 
